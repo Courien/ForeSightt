@@ -1,5 +1,6 @@
 package com.example.mapapp;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -9,6 +10,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.Collection;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -38,6 +44,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        LatLng Philli = new LatLng(44.1545,-75.7088);
+        mMap.addMarker(new MarkerOptions().position(Philli));
+
+        Polyline trip = mMap.addPolyline((new PolylineOptions().add(new LatLng(44.1545, -75.7088), new LatLng(40.714224, -73.961452)).width(5).color(Color.RED)));
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(40.714224, -73.961452);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in New York"));
