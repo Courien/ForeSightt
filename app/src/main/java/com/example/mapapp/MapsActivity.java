@@ -1,7 +1,10 @@
 package com.example.mapapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,6 +14,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.maps.DirectionsApi;
 import com.google.maps.GeoApiContext;
 import com.google.maps.android.PolyUtil;
@@ -22,23 +26,51 @@ import com.google.maps.model.TravelMode;
 import org.joda.time.DateTime;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    public EditText Address;
+    public EditText City;
+    public EditText State;
+    public EditText Zip;
+    public EditText Country;
+    public Button next;
+
 
     public int overview = 0;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        Address = (EditText) findViewById(R.id.Address);
+
+        City = (EditText) findViewById(R.id.City);
+        State = (EditText) findViewById(R.id.State);
+        Zip = (EditText) findViewById(R.id.Zip);
+        Country = (EditText) findViewById(R.id.Country);
+
+        next = (Button) findViewById(R.id.Next);
+
+        next = (Button) findViewById(R.id.Next);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
+
 
 
     /**
@@ -69,6 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+            // Help I only came here because they needed people, I'm NOT GOOD in these type of situations OH GOd the Camera is here
         }
     }
 
@@ -76,11 +109,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         setupGoogleMapScreenSettings(googleMap);
-        DirectionsResult results = getDirectionsDetails("101 Blue Lake Street, Richmond hill, GA 31324, USA","3200 Rosebud Lane, Winter Park, FL 32792,USA", TravelMode.DRIVING);
+        DirectionsResult results = getDirectionsDetails("123 Wahsington Road, Charlette, NC 33134, USA","3200 Rosebud Lane, Winter Park, FL 32792,USA", TravelMode.DRIVING);
         if (results != null) {
             addPolyline(results, googleMap);
             positionCamera(results.routes[overview], googleMap);
             addMarkersToMap(results, googleMap);
+
         }
     }
 
@@ -95,25 +129,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mUiSettings.setScrollGesturesEnabled(true);
         mUiSettings.setZoomGesturesEnabled(true);
         mUiSettings.setTiltGesturesEnabled(true);
+        mUiSettings.setCompassEnabled(true);
         mUiSettings.setRotateGesturesEnabled(true);
+
+
     }
 
     private void addMarkersToMap(DirectionsResult results, GoogleMap mMap) {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(results.routes[overview].legs[overview].startLocation.lat,results.routes[overview].legs[overview].startLocation.lng)).title(results.routes[overview].legs[overview].startAddress));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(results.routes[overview].legs[overview].endLocation.lat,results.routes[overview].legs[overview].endLocation.lng)).title(results.routes[overview].legs[overview].startAddress).snippet(getEndLocationTitle(results)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(results.routes[0].legs[0].startLocation.lat,results.routes[0].legs[0].startLocation.lng)).title(results.routes[0].legs[0].startAddress));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(results.routes[0].legs[0].endLocation.lat,results.routes[0].legs[0].endLocation.lng)).title(results.routes[0].legs[0].startAddress).snippet(getEndLocationTitle(results)));
     }
 
     private void positionCamera(DirectionsRoute route, GoogleMap mMap) {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(route.legs[overview].startLocation.lat, route.legs[overview].startLocation.lng), 12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(route.legs[0].startLocation.lat, route.legs[0].startLocation.lng), 12));
     }
 
     private void addPolyline(DirectionsResult results, GoogleMap mMap) {
-        List<LatLng> decodedPath = PolyUtil.decode(results.routes[overview].overviewPolyline.getEncodedPath());
+        List<LatLng> decodedPath = PolyUtil.decode(results.routes[0].overviewPolyline.getEncodedPath());
         mMap.addPolyline(new PolylineOptions().addAll(decodedPath));
     }
 
     private String getEndLocationTitle(DirectionsResult results){
-        return  "Time :"+ results.routes[overview].legs[overview].duration.humanReadable + " Distance :" + results.routes[overview].legs[overview].distance.humanReadable;
+        return  "Time :"+ results.routes[0].legs[0].duration.humanReadable + " Distance :" + results.routes[0].legs[0].distance.humanReadable;
     }
 
     private GeoApiContext getGeoContext() {
