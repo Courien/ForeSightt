@@ -45,6 +45,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String Zi;
     String Co;
 
+
+
+
+    String AddressDest;
+    String CityDest;
+    String StateDest;
+    String ZipDest;
+    String CountryDest;
+
     public int overview = 0;
 
 
@@ -59,6 +68,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         St = getIntent().getExtras().getString("State");
         Zi = getIntent().getExtras().getString("Zip");
         Co= getIntent().getExtras().getString("Country");
+
+        AddressDest = getIntent().getExtras().getString("AddressDest");
+        CityDest  = getIntent().getExtras().getString("CityDest");
+        StateDest  = getIntent().getExtras().getString("StateDest");
+        ZipDest  = getIntent().getExtras().getString("ZipDest");
+        CountryDest  = getIntent().getExtras().getString("CountryDest");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -108,7 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         setupGoogleMapScreenSettings(googleMap);
-        DirectionsResult results = getDirectionsDetails(Adress+","+ Ci+","+ St +Zi+","+ Co ,"3200 Rosebud Lane, Winter Park, FL 32792,USA", TravelMode.DRIVING);
+        DirectionsResult results = getDirectionsDetails(Adress+","+ Ci+","+ St +Zi+","+ Co ,AddressDest +"," + CityDest+","+ StateDest+ 32792+","+CountryDest , TravelMode.DRIVING);
         if (results != null) {
             addPolyline(results, googleMap);
             positionCamera(results.routes[overview], googleMap);

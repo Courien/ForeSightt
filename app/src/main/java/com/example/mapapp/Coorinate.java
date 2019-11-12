@@ -2,8 +2,7 @@ package com.example.mapapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,6 +16,14 @@ public class Coorinate extends AppCompatActivity {
     public EditText State;
     public EditText Zip;
     public EditText Country;
+
+
+    public EditText AdressDest;
+    public EditText CityDest;
+    public EditText StateDest;
+    public EditText ZipDest;
+    public EditText CountryDest;
+
     public Button next;
 
     public String ad;
@@ -25,6 +32,12 @@ public class Coorinate extends AppCompatActivity {
     public  String Zi;
     public  String Co;
 
+
+    public String SD;
+    public String CiD;
+    public String StD;
+    public String ZiD;
+    public String CoD;
 
 
     @Override
@@ -38,6 +51,11 @@ public class Coorinate extends AppCompatActivity {
         State = (EditText) findViewById(R.id.State);
         Zip = (EditText) findViewById(R.id.Zip);
         Country = (EditText) findViewById(R.id.Country);
+        AdressDest = (EditText)findViewById(R.id.StreetDest);
+        CityDest = (EditText) findViewById(R.id.CityDest);
+        StateDest = (EditText) findViewById(R.id.StateDest);
+        ZipDest = (EditText) findViewById(R.id.ZipDest);
+        CountryDest = (EditText) findViewById(R.id.CountryDest);
 
         next = (Button) findViewById(R.id.Next);
 
@@ -53,11 +71,24 @@ public class Coorinate extends AppCompatActivity {
         Zi = Zip.getText().toString();
         Co = Country.getText().toString();
 
+        SD = AdressDest.getText().toString();
+        CiD = CityDest.getText().toString();
+        StD = StateDest.getText().toString();
+        ZiD = ZipDest.getText().toString();
+        CoD = CountryDest.getText().toString();
+
         firstScreen.putExtra("Address", ad);
         firstScreen.putExtra("City", Ci);
         firstScreen.putExtra("State", St);
         firstScreen.putExtra("Zip", Zi);
         firstScreen.putExtra("Country", Co);
+
+
+        firstScreen.putExtra("AddressDest" , SD);
+        firstScreen.putExtra("CityDest" , CiD);
+        firstScreen.putExtra("StateDest", StD);
+        firstScreen.putExtra("ZipDest" , ZiD);
+        firstScreen.putExtra("CountryDest", CoD);
 
         startActivity(firstScreen);
         finish();
