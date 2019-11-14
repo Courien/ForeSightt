@@ -44,8 +44,6 @@ public class Coorinate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coorinate);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Address = (EditText) findViewById(R.id.Address);
         City = (EditText) findViewById(R.id.City);
         State = (EditText) findViewById(R.id.State);
