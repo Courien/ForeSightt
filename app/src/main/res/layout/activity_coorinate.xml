@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout2"
@@ -16,33 +16,17 @@
         android:layout_height="38dp"
         android:layout_marginStart="47dp"
         android:layout_marginLeft="47dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="144dp"
         android:layout_marginEnd="151dp"
         android:layout_marginRight="151dp"
         android:ems="10"
         android:hint="Street Address"
         android:inputType="textPersonName"
+        android:text="101 Blue Lake St"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
+        app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Country" />
-
-    <EditText
-        android:id="@+id/CountryDest"
-        android:layout_width="387dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginLeft="47dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="151dp"
-        android:layout_marginRight="151dp"
-        android:ems="10"
-        android:hint="Country"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.224"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ZipDest" />
+        app:layout_constraintTop_toBottomOf="@+id/Zip" />
 
     <EditText
         android:id="@+id/ZipDest"
@@ -56,6 +40,7 @@
         android:ems="10"
         android:hint="Zip"
         android:inputType="textPersonName"
+        android:text="31324"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.201"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +58,7 @@
         android:ems="10"
         android:hint="State"
         android:inputType="textPersonName"
+        android:text="GA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.224"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,26 +76,11 @@
         android:ems="10"
         android:hint="State"
         android:inputType="textPersonName"
+        android:text="FL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/City" />
-
-    <EditText
-        android:id="@+id/Country"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="Country"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Zip" />
 
     <Button
         android:id="@+id/Next"
@@ -135,6 +106,7 @@
         android:ems="10"
         android:hint="ZipCode"
         android:inputType="textPersonName"
+        android:text="32792"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,6 +121,7 @@
         android:hint="
 Street Address"
         android:inputType="textPersonName"
+        android:text="3200 Rosebud Ln"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,12 +135,13 @@ Street Address"
         android:ems="10"
         android:hint="City"
         android:inputType="textPersonName"
+        android:text="Winter Park"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Address" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -186,9 +160,10 @@ Street Address"
         android:ems="10"
         android:hint="City"
         android:inputType="textPersonName"
+        android:text="Richmond Hill"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.224"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StreetDest" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

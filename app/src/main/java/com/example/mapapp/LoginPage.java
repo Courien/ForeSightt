@@ -2,8 +2,6 @@ package com.example.mapapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +41,7 @@ public class LoginPage extends AppCompatActivity {
     FirebaseFirestore FuegoLogin;
     private ProgressDialog dialog;
 
+    public String coll2;
 
 
     @Override
@@ -111,6 +113,10 @@ public class LoginPage extends AppCompatActivity {
        final  String user = Username.getText().toString().trim();
        final  String pass = Password.getText().toString().trim();
 
+       String collect = Collection.getText().toString().trim();
+       final Intent Coorniste = new Intent(this, Coorinate.class);
+
+
        dialog.setMessage("Logging in");
        dialog.show();
         login.signInWithEmailAndPassword(user, pass)
@@ -120,7 +126,8 @@ public class LoginPage extends AppCompatActivity {
                         dialog.dismiss();
                         if (task.isSuccessful())
                         {
-                            startActivity(new Intent(getApplicationContext(), Sceduler.class));
+                            Coorniste.putExtra("Collection",collect);
+                            startActivity(Coorniste);
                         }
                     }
                 });
@@ -134,6 +141,7 @@ public class LoginPage extends AppCompatActivity {
         if (v == Register)
         {
             Intent Loginscreen = new Intent(this, SignUp.class);
+
             startActivity(Loginscreen);
         }
         if(v == LoginButton)

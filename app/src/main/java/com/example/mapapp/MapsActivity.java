@@ -1,10 +1,11 @@
 package com.example.mapapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.FragmentActivity;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,6 +15,9 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.maps.DirectionsApi;
 import com.google.maps.GeoApiContext;
 import com.google.maps.android.PolyUtil;
@@ -24,10 +28,9 @@ import com.google.maps.model.TravelMode;
 
 import org.joda.time.DateTime;
 
+import java.time.LocalTime;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -43,19 +46,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String Ci;
     String St;
     String Zi;
-    String Co;
 
 
+
+    String Colle;
 
 
     String AddressDest;
     String CityDest;
     String StateDest;
     String ZipDest;
-    String CountryDest;
 
     public int overview = 0;
 
+    FirebaseFirestore Marker;
 
 
     @Override
@@ -63,20 +67,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
+
+        Marker = FirebaseFirestore.getInstance();
         Adress = getIntent().getExtras().getString("Address");
         Ci = getIntent().getExtras().getString("City");
         St = getIntent().getExtras().getString("State");
         Zi = getIntent().getExtras().getString("Zip");
-        Co= getIntent().getExtras().getString("Country");
+
+        Colle = getIntent().getExtras().getString("Collection");
 
         AddressDest = getIntent().getExtras().getString("AddressDest");
         CityDest  = getIntent().getExtras().getString("CityDest");
         StateDest  = getIntent().getExtras().getString("StateDest");
         ZipDest  = getIntent().getExtras().getString("ZipDest");
-        CountryDest  = getIntent().getExtras().getString("CountryDest");
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -115,21 +122,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-            // Help I only came here because they needed people, I'm NOT GOOD in these type of situations OH GOd the Camera is here
         }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+
         setupGoogleMapScreenSettings(googleMap);
-        DirectionsResult results = getDirectionsDetails(Adress+","+ Ci+","+ St +Zi+","+ Co ,AddressDest +"," + CityDest+","+ StateDest+ 32792+","+CountryDest , TravelMode.DRIVING);
+
+
+        DirectionsResult results = getDirectionsDetails(Adress+","+ Ci+","+ St +Zi+", USA" ,AddressDest +"," + CityDest+","+ StateDest + ZipDest+", USA" , TravelMode.DRIVING);
         if (results != null) {
             addPolyline(results, googleMap);
             positionCamera(results.routes[overview], googleMap);
             addMarkersToMap(results, googleMap);
 
         }
+
+
+        Marker.collection("user").document(Colle).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String Ad1 = documentSnapshot.getString("Ending Address");
+                        String Ci1 = documentSnapshot.getString("Ending City");
+                        String St1 = documentSnapshot.getString("Ending State");
+                        String Zi1 = documentSnapshot.getString("Ending Zip");
+                        String Ad2 = documentSnapshot.getString("Starting Address");
+                        String Ci2 = documentSnapshot.getString("Starting City");
+                        String St2 = documentSnapshot.getString("Starting State");
+                        String Zi2 = documentSnapshot.getString("Starting Zip");
+                        DirectionsResult r1 = getDirectionsDetails("101 Blue Lake Street, Richmond Hill, Ga 31324, USA", "3200 Rosebud Lane, Winter Park, FL 32792, USA", TravelMode.DRIVING);
+                        //DirectionsResult r2 = getDirectionsDetails(Ad2 + ","+ Ci2 + ","+St2+Zi2+", USA" , Ad1 + "," + Ci1+","+ St1+Zi1+", USA", TravelMode.DRIVING);
+
+
+                        googleMap.addMarker(new MarkerOptions().position(new LatLng(r1.routes[0].legs[0].endLocation.lat,r1.routes[0].legs[0].endLocation.lng)).title(r1.routes[0].legs[0].startAddress).snippet(getEndLocationTitle(r1)));
+                    }
+                });
+
+
     }
 
     private void setupGoogleMapScreenSettings(GoogleMap mMap) {
