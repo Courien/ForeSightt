@@ -1,7 +1,6 @@
 package com.example.mapapp;
 
 import android.content.Intent;
-import android.location.Address;
 import android.os.Bundle;
 
 
@@ -56,7 +55,7 @@ public class Coorinate extends AppCompatActivity {
 
         Address = (EditText) findViewById(R.id.Address);
         City = (EditText) findViewById(R.id.City);
-        State = (EditText) findViewById(R.id.State);
+        State = (EditText) findViewById(R.id.TuesdayState);
         Zip = (EditText) findViewById(R.id.Zip);
         AdressDest = (EditText)findViewById(R.id.StreetDest);
         CityDest = (EditText) findViewById(R.id.CityDest);

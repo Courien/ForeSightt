@@ -28,100 +28,111 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Sunday"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="97dp"
-                app:cardBackgroundColor="#94FF1E1E">
+                android:layout_height="103dp"
+                android:clickable="true"
+                android:onClick="Sunday"
+                app:cardBackgroundColor="#E9FF5858">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/Sunday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sunday" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Monday"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="92dp"
-                android:background="#F39900"
-                app:cardBackgroundColor="#FD9F49">
+                android:layout_height="104dp"
+                android:clickable="true"
+                android:onClick="Monday"
+                app:cardBackgroundColor="#F09B61">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/Monday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Monday" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Tuesday"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="112dp"
-                app:cardBackgroundColor="#FFD85E">
+                android:layout_height="90dp"
+                android:clickable="true"
+                android:onClick="Tuesday"
+                app:cardBackgroundColor="#FDE17A">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/Tuesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tuesday" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Wednesday"
-                android:layout_width="383dp"
-                android:layout_height="97dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="36dp"
-                app:cardBackgroundColor="#DCFF56">
+            <Button
+                android:id="@+id/Add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Add"
+                android:text="Add" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="107dp"
+                android:clickable="true"
+                android:onClick="Wednesday"
+                app:cardBackgroundColor="#FAB3F566">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/Wednesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Wednesday" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Thursday"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="111dp"
-                app:cardBackgroundColor="#67FFCC">
+                android:layout_height="105dp"
+                android:clickable="true"
+                android:onClick="Thursday"
+                app:cardBackgroundColor="#FA6CF8F4">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/Thursday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thursday" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Friday"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="92dp"
-                android:background="#4F6BFD"
-                app:cardBackgroundColor="#70AFFD">
+                android:layout_height="96dp"
+                android:clickable="true"
+                android:onClick="Fridays"
+                app:cardBackgroundColor="#FC7394F8">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/Friday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Friday" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/Saturday"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="87dp"
-                app:cardBackgroundColor="#C266FD">
+                android:layout_height="104dp"
+                android:clickable="true"
+                android:onClick="Saturday"
+                app:cardBackgroundColor="#F7D87FF7">
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/Saturday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Saturday" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 

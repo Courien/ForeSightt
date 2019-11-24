@@ -114,7 +114,7 @@ public class LoginPage extends AppCompatActivity {
        final  String pass = Password.getText().toString().trim();
 
        String collect = Collection.getText().toString().trim();
-       final Intent Coorniste = new Intent(this, Coorinate.class);
+       final Intent Coorniste = new Intent(this, Sceduler.class);
 
 
        dialog.setMessage("Logging in");
